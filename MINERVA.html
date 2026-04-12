@@ -20,900 +20,577 @@
   --text-bright:#e8f4ff;
   --border:rgba(0,212,255,0.16);
   --border-bright:rgba(0,212,255,0.42);
-  --red:#ff4466;
-  --red-dim:rgba(255,68,102,0.12);
   --green:#00ff88;
   --green-dim:rgba(0,255,136,0.10);
 }
-
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Rajdhani', sans-serif;
-  color: var(--text);
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+html,body{
+  height:100%;width:100%;overflow:hidden;
+  background:#000;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Rajdhani',sans-serif;
+  color:var(--text);
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
-
-/* 19.5:9 phone frame */
-.phone-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: calc(100vh * 9 / 19.5);
-  max-height: calc(100vw * 19.5 / 9);
-  background: var(--navy);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+.phone-frame{
+  position:relative;
+  width:100%;height:100%;
+  max-width:calc(100vh * 9 / 19.5);
+  max-height:calc(100vw * 19.5 / 9);
+  background:var(--navy);
+  overflow:hidden;
+  display:flex;flex-direction:column;
 }
-
-.app { width: 100%; flex: 1; overflow: hidden; position: relative; display: flex; flex-direction: column; }
-.screens { display: flex; width: 200%; height: 100%; transition: transform 0.38s cubic-bezier(0.4,0,0.2,1); }
-.screen { width: 50%; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.app{width:100%;flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column;}
 
 /* TOPBAR */
-.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 6px; border-bottom: 0.5px solid var(--border); flex-shrink: 0; }
-.logo { font-size: 15px; font-weight: 700; letter-spacing: 3px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; }
-.logo span { color: var(--text-dim); font-weight: 300; }
-.topbar-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-.status { display: flex; align-items: center; gap: 6px; font-size: 9px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; }
-.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
-.today-date { font-size: 9px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* NAV PIPS */
-.nav-hint { display: flex; justify-content: center; gap: 6px; padding: 4px 0; flex-shrink: 0; }
-.nav-pip { width: 18px; height: 2px; border-radius: 1px; background: var(--border); transition: all 0.2s; }
-.nav-pip.active { background: var(--cyan); width: 26px; }
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px 6px;border-bottom:0.5px solid var(--border);flex-shrink:0;}
+.logo{font-size:15px;font-weight:700;letter-spacing:3px;color:var(--cyan);font-family:'Share Tech Mono',monospace;}
+.logo span{color:var(--text-dim);font-weight:300;}
+.topbar-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+.status{display:flex;align-items:center;gap:6px;font-size:9px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite;}
+.today-date{font-size:9px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
 /* WEATHER */
-.weather-section { padding: 10px 16px 8px; border-bottom: 0.5px solid var(--border); flex-shrink: 0; }
-.weather-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.temp-row { display: flex; align-items: baseline; gap: 4px; }
-.temp-big { font-size: 42px; font-weight: 300; color: var(--cyan); line-height: 1; font-family: 'Share Tech Mono', monospace; }
-.temp-unit { font-size: 16px; color: var(--text-dim); }
-.weather-meta { text-align: right; }
-.w-val { font-size: 11px; color: var(--text); letter-spacing: 0.5px; }
-.chart-wrap { position: relative; width: 100%; height: 100px; }
-.chart-labels { display: flex; justify-content: space-between; padding: 3px 2px 0; font-size: 8px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; }
-.legend { display: flex; gap: 12px; margin-top: 4px; font-size: 8px; color: var(--text-dim); }
-.leg-item { display: flex; align-items: center; gap: 4px; }
-.leg-dot { width: 10px; height: 2px; border-radius: 1px; }
+.weather-section{padding:10px 16px 8px;border-bottom:0.5px solid var(--border);flex-shrink:0;}
+.weather-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.temp-row{display:flex;align-items:baseline;gap:4px;}
+.temp-big{font-size:42px;font-weight:300;color:var(--cyan);line-height:1;font-family:'Share Tech Mono',monospace;}
+.temp-unit{font-size:16px;color:var(--text-dim);}
+.w-val{font-size:11px;color:var(--text);letter-spacing:0.5px;}
+
+/* SCROLLABLE CHART */
+.chart-outer{position:relative;width:100%;overflow:hidden;}
+.chart-scroll{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;cursor:grab;}
+.chart-scroll:active{cursor:grabbing;}
+.chart-scroll::-webkit-scrollbar{height:2px;}
+.chart-scroll::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:1px;}
+.chart-inner{position:relative;height:110px;}
+.chart-labels-scroll{display:flex;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+.chart-labels-scroll::-webkit-scrollbar{display:none;}
+.chart-label-row{display:flex;flex-shrink:0;}
+.chart-label-row span{font-size:8px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;text-align:center;}
+.legend{display:flex;gap:12px;margin-top:4px;font-size:8px;color:var(--text-dim);}
+.leg-item{display:flex;align-items:center;gap:4px;}
+.leg-dot{width:10px;height:2px;border-radius:1px;}
+.scroll-hint{font-size:7px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;letter-spacing:1px;text-align:right;margin-top:2px;opacity:0.6;}
 
 /* PROTOCOL LIST */
-.protocols-section { flex: 1; padding: 10px 16px; display: flex; flex-direction: column; overflow: hidden; min-height: 0; }
-.section-label { font-size: 8px; letter-spacing: 3px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; margin-bottom: 8px; flex-shrink: 0; }
-.protocol-list { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; flex: 1; padding-bottom: 4px; }
-.protocol-list::-webkit-scrollbar { width: 2px; }
-.protocol-list::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 1px; }
-
-.protocol-card { background: var(--panel); border: 0.5px solid var(--border); border-radius: 10px; padding: 11px 14px; cursor: pointer; position: relative; overflow: hidden; display: flex; align-items: center; gap: 12px; flex-shrink: 0; transition: border-color 0.15s, background 0.15s, opacity 0.15s; }
-.protocol-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--cyan); opacity: 0.5; }
-.protocol-card.dragging { opacity: 0.4; border-color: var(--border-bright); }
-.protocol-card.drag-over { border-color: var(--cyan); background: var(--panel2); }
-.drag-handle { color: var(--text-dim); font-size: 14px; cursor: grab; padding: 4px 2px; display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
-.drag-handle span { display: block; width: 14px; height: 1.5px; background: var(--text-dim); border-radius: 1px; }
-.drag-handle:active { cursor: grabbing; }
-.p-icon { width: 32px; height: 32px; border-radius: 7px; background: var(--cyan-dim); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: 'Share Tech Mono', monospace; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
-.p-info { flex: 1; min-width: 0; }
-.p-name { font-size: 13px; font-weight: 600; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.p-meta { font-size: 8px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; margin-top: 2px; }
-.p-arrow { color: var(--cyan); font-size: 18px; opacity: 0.4; flex-shrink: 0; }
-
-/* EDITOR */
-.editor-topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px 6px; border-bottom: 0.5px solid var(--border); flex-shrink: 0; }
-.editor-title { font-size: 9px; letter-spacing: 3px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; }
-.swipe-back-btn { font-size: 9px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; cursor: pointer; padding: 5px 10px; border: 0.5px solid var(--border); border-radius: 6px; background: transparent; }
-.swipe-back-btn:active { border-color: var(--border-bright); color: var(--cyan); }
-
-.editor-body { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
-.editor-body::-webkit-scrollbar { width: 2px; }
-.editor-body::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 1px; }
-
-.p-editor-card { background: var(--panel); border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden; flex-shrink: 0; transition: opacity 0.15s; }
-.p-editor-card.dragging { opacity: 0.4; border-color: var(--border-bright); }
-.p-editor-card.drag-over { border-color: var(--cyan); }
-
-.p-editor-header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; cursor: pointer; }
-.p-editor-header:active { background: var(--panel2); }
-.editor-drag-handle { color: var(--text-dim); cursor: grab; padding: 4px 2px; display: flex; flex-direction: column; gap: 3px; flex-shrink: 0; }
-.editor-drag-handle span { display: block; width: 12px; height: 1.5px; background: var(--text-dim); border-radius: 1px; }
-.editor-drag-handle:active { cursor: grabbing; }
-.p-editor-icon { width: 28px; height: 28px; border-radius: 6px; background: var(--cyan-dim); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-family: 'Share Tech Mono', monospace; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
-.p-name-input { background: transparent; border: none; color: var(--text-bright); font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 600; outline: none; flex: 1; min-width: 0; -webkit-user-select: text; user-select: text; }
-.p-name-input:focus { color: var(--cyan); }
-.p-editor-count { font-size: 8px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; white-space: nowrap; }
-.p-editor-toggle { font-size: 13px; color: var(--text-dim); transition: transform 0.2s; flex-shrink: 0; }
-.p-editor-toggle.open { transform: rotate(90deg); }
-
-.p-steps-area { display: none; padding: 0 12px 10px; border-top: 0.5px solid var(--border); }
-.p-steps-area.open { display: block; }
-.step-row { display: flex; align-items: flex-start; gap: 6px; padding: 6px 0; border-bottom: 0.5px solid var(--border); }
-.step-row:last-of-type { border-bottom: none; }
-.step-num-lbl { font-size: 8px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; width: 20px; flex-shrink: 0; padding-top: 3px; }
-.step-input { flex: 1; background: transparent; border: none; color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 12px; resize: none; outline: none; line-height: 1.5; min-height: 20px; -webkit-user-select: text; user-select: text; }
-.step-input:focus { color: var(--text-bright); }
-.step-del { width: 18px; height: 18px; border-radius: 4px; background: var(--red-dim); border: 0.5px solid rgba(255,68,102,0.25); color: var(--red); font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; padding: 0; }
-.step-del:active { background: rgba(255,68,102,0.25); }
-
-.add-step-btn { width: 100%; padding: 7px; background: var(--cyan-dim); border: 0.5px dashed var(--border-bright); border-radius: 6px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 1px; cursor: pointer; margin-top: 8px; text-align: center; }
-.add-step-btn:active { background: rgba(0,212,255,0.18); }
-.del-protocol-btn { width: 100%; padding: 7px; background: var(--red-dim); border: 0.5px solid rgba(255,68,102,0.25); border-radius: 6px; color: var(--red); font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 1px; cursor: pointer; margin-top: 6px; text-align: center; }
-.del-protocol-btn:active { background: rgba(255,68,102,0.22); }
-.add-protocol-btn { width: 100%; padding: 12px; background: var(--cyan-dim); border: 0.5px dashed var(--border-bright); border-radius: 10px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 2px; cursor: pointer; text-align: center; flex-shrink: 0; }
-.add-protocol-btn:active { background: rgba(0,212,255,0.18); }
+.protocols-section{flex:1;padding:10px 16px;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+.section-label{font-size:8px;letter-spacing:3px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:8px;flex-shrink:0;}
+.protocol-list{display:flex;flex-direction:column;gap:8px;overflow-y:auto;flex:1;padding-bottom:4px;}
+.protocol-list::-webkit-scrollbar{width:2px;}
+.protocol-list::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:1px;}
+.protocol-card{background:var(--panel);border:0.5px solid var(--border);border-radius:10px;padding:11px 14px;cursor:pointer;position:relative;overflow:hidden;display:flex;align-items:center;gap:12px;flex-shrink:0;transition:border-color 0.15s,background 0.15s;}
+.protocol-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan);opacity:0.5;}
+.protocol-card:active{background:var(--panel2);border-color:var(--border-bright);}
+.drag-handle{color:var(--text-dim);padding:4px 2px;display:flex;flex-direction:column;gap:3px;flex-shrink:0;cursor:grab;touch-action:none;}
+.drag-handle span{display:block;width:14px;height:1.5px;background:var(--text-dim);border-radius:1px;}
+.protocol-card.dragging{opacity:0.35;border-color:var(--border-bright);}
+.protocol-card.drag-over{border-color:var(--cyan);background:var(--panel2);}
+.p-icon{width:32px;height:32px;border-radius:7px;background:var(--cyan-dim);border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'Share Tech Mono',monospace;color:var(--cyan);font-weight:700;flex-shrink:0;}
+.p-info{flex:1;min-width:0;}
+.p-name{font-size:13px;font-weight:600;color:var(--text-bright);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.p-meta{font-size:8px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-top:2px;}
+.p-arrow{color:var(--cyan);font-size:18px;opacity:0.4;flex-shrink:0;}
 
 /* PLAYER */
-.player-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--navy); z-index: 300; display: none; flex-direction: column; }
-.player-wrap.active { display: flex; }
-
-.player-header { padding: 14px 16px 10px; border-bottom: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-.player-ptitle { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; flex: 1; margin-right: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.player-close-btn { background: transparent; border: 0.5px solid var(--border); border-radius: 7px; color: var(--text-dim); padding: 7px 14px; font-family: 'Share Tech Mono', monospace; font-size: 10px; cursor: pointer; letter-spacing: 1px; flex-shrink: 0; }
-.player-close-btn:active { border-color: var(--border-bright); color: var(--cyan); }
-
-.prog-wrap { padding: 0 16px; margin: 12px 0 0; flex-shrink: 0; }
-.prog-track { height: 3px; background: rgba(0,212,255,0.08); border-radius: 2px; }
-.prog-fill { height: 3px; background: var(--cyan); border-radius: 2px; transition: width 0.35s ease; }
-.prog-labels { display: flex; justify-content: space-between; margin-top: 6px; }
-.prog-step-label { font-size: 13px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
-.prog-pct-label { font-size: 18px; font-weight: 700; color: var(--cyan); font-family: 'Share Tech Mono', monospace; }
-
-.step-body { flex: 1; padding: 16px 20px 12px; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
-.step-lbl { font-size: 13px; letter-spacing: 3px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; margin-bottom: 16px; opacity: 0.8; }
-.step-txt { color: var(--text-bright); line-height: 1.4; letter-spacing: 0.2px; font-weight: 500; word-break: break-word; }
-
-.done-screen { display: none; flex-direction: column; align-items: center; justify-content: center; flex: 1; text-align: center; padding: 28px; }
-.done-screen.show { display: flex; }
-.done-icon { font-size: 32px; margin-bottom: 16px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; letter-spacing: 4px; }
-.done-title { font-size: 28px; font-weight: 700; color: var(--cyan); letter-spacing: 3px; margin-bottom: 8px; }
-.done-sub { font-size: 11px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; letter-spacing: 2px; }
-.done-back { margin-top: 32px; padding: 13px 32px; background: var(--cyan-dim); border: 0.5px solid var(--border-bright); border-radius: 10px; color: var(--cyan); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; cursor: pointer; }
-
-.player-ctrls { padding: 14px 16px; border-top: 0.5px solid var(--border); display: flex; gap: 10px; flex-shrink: 0; }
-.p-ctrl { flex: 1; padding: 14px 8px; background: var(--panel); border: 0.5px solid var(--border); border-radius: 10px; color: var(--text-dim); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 1px; cursor: pointer; text-align: center; transition: border-color 0.15s, color 0.15s; }
-.p-ctrl:active { border-color: var(--border-bright); color: var(--cyan); }
-.p-ctrl.primary { background: var(--cyan-dim); border-color: var(--border-bright); color: var(--cyan); flex: 2; font-size: 12px; }
-.p-ctrl.finish { background: var(--green-dim); border-color: rgba(0,255,136,0.3); color: var(--green); }
+.player-wrap{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:300;display:none;flex-direction:column;}
+.player-wrap.active{display:flex;}
+.player-header{padding:14px 16px 10px;border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.player-ptitle{font-size:14px;font-weight:700;letter-spacing:2px;color:var(--cyan);font-family:'Share Tech Mono',monospace;flex:1;margin-right:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.player-close-btn{background:transparent;border:0.5px solid var(--border);border-radius:7px;color:var(--text-dim);padding:7px 14px;font-family:'Share Tech Mono',monospace;font-size:10px;cursor:pointer;letter-spacing:1px;flex-shrink:0;}
+.player-close-btn:active{border-color:var(--border-bright);color:var(--cyan);}
+.prog-wrap{padding:0 16px;margin:12px 0 0;flex-shrink:0;}
+.prog-track{height:3px;background:rgba(0,212,255,0.08);border-radius:2px;}
+.prog-fill{height:3px;background:var(--cyan);border-radius:2px;transition:width 0.35s ease;}
+.prog-labels{display:flex;justify-content:space-between;margin-top:6px;}
+.prog-step-label{font-size:13px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+.prog-pct-label{font-size:18px;font-weight:700;color:var(--cyan);font-family:'Share Tech Mono',monospace;}
+.step-body{flex:1;padding:16px 20px 12px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+.step-lbl{font-size:13px;letter-spacing:3px;color:var(--cyan);font-family:'Share Tech Mono',monospace;margin-bottom:16px;opacity:0.8;}
+.step-txt{color:var(--text-bright);line-height:1.5;letter-spacing:0.2px;font-weight:500;white-space:pre-line;word-break:break-word;}
+.done-screen{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;text-align:center;padding:28px;}
+.done-screen.show{display:flex;}
+.done-icon{font-size:32px;margin-bottom:16px;color:var(--cyan);font-family:'Share Tech Mono',monospace;letter-spacing:4px;}
+.done-title{font-size:28px;font-weight:700;color:var(--cyan);letter-spacing:3px;margin-bottom:8px;}
+.done-sub{font-size:11px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;letter-spacing:2px;}
+.done-back{margin-top:32px;padding:13px 32px;background:var(--cyan-dim);border:0.5px solid var(--border-bright);border-radius:10px;color:var(--cyan);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;}
+.player-ctrls{padding:14px 16px;border-top:0.5px solid var(--border);display:flex;gap:10px;flex-shrink:0;}
+.p-ctrl{flex:1;padding:14px 8px;background:var(--panel);border:0.5px solid var(--border);border-radius:10px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;text-align:center;transition:border-color 0.15s,color 0.15s;}
+.p-ctrl:active{border-color:var(--border-bright);color:var(--cyan);}
+.p-ctrl.primary{background:var(--cyan-dim);border-color:var(--border-bright);color:var(--cyan);flex:2;font-size:12px;}
+.p-ctrl.finish{background:var(--green-dim);border-color:rgba(0,255,136,0.3);color:var(--green);}
 </style>
 </head>
 <body>
-
 <div class="phone-frame">
 <div class="app">
-  <div class="screens" id="screens">
 
-    <!-- HOME SCREEN -->
-    <div class="screen">
-      <div class="topbar">
-        <div class="logo">MIN<span>ERVA</span></div>
-        <div class="topbar-right">
-          <div class="status"><div class="dot"></div>SYSTEM ONLINE</div>
-          <div class="today-date" id="todayDate"></div>
-        </div>
-      </div>
-      <div class="nav-hint">
-        <div class="nav-pip active" id="pip0"></div>
-        <div class="nav-pip" id="pip1"></div>
-      </div>
-      <div class="weather-section">
-        <div class="weather-header">
-          <div class="temp-row">
-            <div class="temp-big" id="tempDisplay">--</div>
-            <div class="temp-unit">°C</div>
-          </div>
-          <div class="weather-meta">
-            <div class="w-val" id="condDisplay">LOADING...</div>
-          </div>
-        </div>
-        <div class="chart-wrap">
-          <canvas id="wChart" role="img" aria-label="24h weather forecast">Forecast data</canvas>
-        </div>
-        <div class="chart-labels" id="chartLabels"></div>
-        <div class="legend">
-          <div class="leg-item"><div class="leg-dot" style="background:#00d4ff"></div><span>TEMP °C</span></div>
-          <div class="leg-item"><div class="leg-dot" style="background:rgba(0,140,255,0.6)"></div><span>RAIN %</span></div>
-        </div>
-      </div>
-      <div class="protocols-section">
-        <div class="section-label">// PROTOCOLS — SWIPE LEFT TO EDIT</div>
-        <div class="protocol-list" id="homeProtoList"></div>
-      </div>
+  <!-- HOME SCREEN -->
+  <div class="topbar">
+    <div class="logo">MIN<span>ERVA</span></div>
+    <div class="topbar-right">
+      <div class="status"><div class="dot"></div>SYSTEM ONLINE</div>
+      <div class="today-date" id="todayDate"></div>
     </div>
-
-    <!-- EDITOR SCREEN -->
-    <div class="screen">
-      <div class="editor-topbar">
-        <div class="editor-title">// PROTOCOL EDITOR</div>
-        <button class="swipe-back-btn" onclick="goToScreen(0)">‹ HOME</button>
-      </div>
-      <div class="nav-hint">
-        <div class="nav-pip" id="pip0b"></div>
-        <div class="nav-pip active" id="pip1b"></div>
-      </div>
-      <div class="editor-body" id="editorBody"></div>
-    </div>
-
   </div>
+
+  <div class="weather-section">
+    <div class="weather-header">
+      <div class="temp-row">
+        <div class="temp-big" id="tempDisplay">--</div>
+        <div class="temp-unit">°C</div>
+      </div>
+      <div class="w-val" id="condDisplay">LOADING...</div>
+    </div>
+    <div class="chart-outer">
+      <div class="chart-scroll" id="chartScroll">
+        <div class="chart-inner" id="chartInner">
+          <canvas id="wChart" role="img" aria-label="24h weather forecast"></canvas>
+        </div>
+      </div>
+      <div class="chart-labels-scroll" id="labelsScroll">
+        <div class="chart-label-row" id="chartLabelRow"></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:3px;">
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#00d4ff"></div><span>TEMP °C</span></div>
+        <div class="leg-item"><div class="leg-dot" style="background:rgba(0,140,255,0.6)"></div><span>RAIN %</span></div>
+      </div>
+      <div class="scroll-hint">SCROLL FOR 24H ›</div>
+    </div>
+  </div>
+
+  <div class="protocols-section">
+    <div class="section-label">// SELECT PROTOCOL</div>
+    <div class="protocol-list" id="homeProtoList"></div>
+  </div>
+
+  <!-- PLAYER -->
+  <div class="player-wrap" id="playerWrap">
+    <div class="player-header">
+      <div class="player-ptitle" id="playerPTitle">PROTOCOL</div>
+      <button class="player-close-btn" onclick="closePlayer()">✕ EXIT</button>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="prog-labels">
+        <span class="prog-step-label" id="progCounter">STEP 1 OF 1</span>
+        <span class="prog-pct-label" id="progPct">0%</span>
+      </div>
+    </div>
+    <div class="step-body" id="playerStepBody">
+      <div class="step-lbl" id="stepLbl">STEP 01</div>
+      <div class="step-txt" id="stepTxt"></div>
+    </div>
+    <div class="done-screen" id="doneScreen">
+      <div class="done-icon">[ • ]</div>
+      <div class="done-title">COMPLETE</div>
+      <div class="done-sub">ALL STEPS EXECUTED SUCCESSFULLY</div>
+      <button class="done-back" onclick="closePlayer()">RETURN TO BASE</button>
+    </div>
+    <div class="player-ctrls">
+      <button class="p-ctrl" id="backBtn" onclick="playerPrev()">‹ BACK</button>
+      <button class="p-ctrl primary" id="nextBtn" onclick="playerNext()">NEXT STEP ›</button>
+      <button class="p-ctrl finish" id="doneBtn" style="display:none" onclick="closePlayer()">✓ DONE</button>
+    </div>
+  </div>
+
 </div>
-
-<!-- PROTOCOL PLAYER -->
-<div class="player-wrap" id="playerWrap">
-  <div class="player-header">
-    <div class="player-ptitle" id="playerPTitle">PROTOCOL</div>
-    <button class="player-close-btn" onclick="closePlayer()">✕ EXIT</button>
-  </div>
-  <div class="prog-wrap">
-    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
-    <div class="prog-labels">
-      <span class="prog-step-label" id="progCounter">STEP 1 OF 1</span>
-      <span class="prog-pct-label" id="progPct">0%</span>
-    </div>
-  </div>
-  <div class="step-body" id="playerStepBody">
-    <div class="step-lbl" id="stepLbl">STEP 01</div>
-    <div class="step-txt" id="stepTxt"></div>
-  </div>
-  <div class="done-screen" id="doneScreen">
-    <div class="done-icon">[ • ]</div>
-    <div class="done-title">COMPLETE</div>
-    <div class="done-sub">ALL STEPS EXECUTED SUCCESSFULLY</div>
-    <button class="done-back" onclick="closePlayer()">RETURN TO BASE</button>
-  </div>
-  <div class="player-ctrls">
-    <button class="p-ctrl" id="backBtn" onclick="playerPrev()">‹ BACK</button>
-    <button class="p-ctrl primary" id="nextBtn" onclick="playerNext()">NEXT STEP ›</button>
-    <button class="p-ctrl finish" id="doneBtn" style="display:none" onclick="closePlayer()">✓ DONE</button>
-  </div>
 </div>
-</div><!-- end phone-frame -->
 
 <script>
 /* ── DATE ── */
-(function() {
-  var d = new Date();
-  var days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
-  var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-  var str = days[d.getDay()] + ' ' + String(d.getDate()).padStart(2,'0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-  document.getElementById('todayDate').textContent = str;
+(function(){
+  var d=new Date();
+  var days=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  var months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  document.getElementById('todayDate').textContent=days[d.getDay()]+' '+String(d.getDate()).padStart(2,'0')+' '+months[d.getMonth()]+' '+d.getFullYear();
 })();
 
-/* ── DATA ── */
-const DEFAULT_PROTOCOLS = [
+/* ── PROTOCOLS ── */
+var protocols=[
   {
-    id:'morning', icon:'MW', name:'Morning Weekday Protocol',
+    id:'cycling',icon:'CY',name:'Cycling Protocol',
     steps:[
-      'Wake up. Do not check your phone. Lie still for 60 seconds and set your intention for the day.',
-      'Drink 500ml of water with a pinch of sea salt and a squeeze of lemon.',
-      'Step outside or open a window. Get 5 minutes of natural light exposure.',
-      '10 minutes of mobility work. Focus on hips, thoracic spine, and ankles.',
-      'Cold exposure — end your shower with 2 minutes of cold water. Breathe through it.',
-      'Prepare and eat a high-protein breakfast. Minimum 40g of protein.',
-      'Review your top 3 priorities for the day. Write them down on paper.',
-      '10 minutes of focused reading or journaling. No news.',
-      'Protocol complete. Begin your workday with your top priority first.'
+      'Drink Water\nTrousers\nSocks',
+      'Phone\nHeadphone\nKeys',
+      'Cycle',
+      'Towel\nPrep Clothes\nFacewash',
+      'Quick Shower\nDry + Dress\nTowel Dry',
+      'Clothes Laundry\nDrink Water\nSleep'
     ]
   },
   {
-    id:'entry', icon:'EP', name:'Entry Protocol',
+    id:'morning',icon:'MW',name:'Morning Weekday Protocol',
     steps:[
-      'Remove shoes at the door. Change into home clothes immediately.',
-      'Wash hands and face with cold water.',
-      'Drink a glass of water. Eat a piece of fruit if more than 3 hours since last meal.',
-      'Review your reminders and tasks for the remaining day.',
-      'Set your intention for the next block of time — work, rest, or training.'
+      'Drink Water\nPrep Clothes\nTowel',
+      'Wash Face\nApply NCA\nBrush',
+      'Quick Shower\nDry Deo Dress\nTowel Dry',
+      'Moisturize\nSocks\nCall Uber',
+      'Keys\nWallet\nSunscreen',
+      'Perfume + Watch\nDrink Water\nMask'
     ]
   },
   {
-    id:'winddown', icon:'WD', name:'Wind Down Protocol',
+    id:'entry',icon:'EP',name:'Entry Protocol',
     steps:[
-      'Set all screens to night mode. Dim all lights in the room.',
-      'Prepare a calming drink — herbal tea or warm water with magnesium.',
-      'Write a brain dump — everything on your mind, on paper.',
-      "Review tomorrow's schedule. Confirm your top 3 priorities are set.",
-      'Light stretching or yoga — 10 minutes. Focus on breathing.',
-      'Read fiction or something non-stimulating for 20 minutes.',
-      'Lights out. Phone face down and out of reach. Sleep window initiated.'
+      'Towel\nPrep Clothes\nDrink Water',
+      'Facewash\nQuick Shower\nDry + Dress',
+      'Dry Towel\nClothes Laundry\nDrink Water'
+    ]
+  },
+  {
+    id:'winddown',icon:'WD',name:'Wind Down Protocol',
+    steps:[
+      'Drink Water\nPrep Weights + Room\nTowel',
+      'Work Out\nQuick Shower\nDry + Dress',
+      'NCA\nDry Towel\nMoisturize',
+      'Organize Table\nOrganize Wardrobe\nPrep Work Bag',
+      'Read Non Fiction\nRead Casual\nJournal',
+      'Prep Cycling Bag\nMake Bed\nCharge Phone + Headphone',
+      'Drink Water\nRefill Water\nSleep'
     ]
   }
 ];
 
-let protocols = [];
-
-function saveProtocols() {
-  try { localStorage.setItem('minerva_protocols', JSON.stringify(protocols)); } catch(e) {}
-}
-function loadProtocols() {
-  try {
-    var saved = localStorage.getItem('minerva_protocols');
-    protocols = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(DEFAULT_PROTOCOLS));
-  } catch(e) {
-    protocols = JSON.parse(JSON.stringify(DEFAULT_PROTOCOLS));
-  }
-}
-
-/* ── NAVIGATION ── */
-var currentScreen = 0;
-function goToScreen(n) {
-  currentScreen = n;
-  document.getElementById('screens').style.transform = 'translateX(' + (-n * 50) + '%)';
-  document.getElementById('pip0').classList.toggle('active', n === 0);
-  document.getElementById('pip1').classList.toggle('active', n === 1);
-  document.getElementById('pip0b').classList.toggle('active', n === 0);
-  document.getElementById('pip1b').classList.toggle('active', n === 1);
-  if (n === 1) renderEditor();
-}
-
-/* ── HOME LIST ── */
-function renderHomeList() {
-  var el = document.getElementById('homeProtoList');
-  el.innerHTML = '';
-  protocols.forEach(function(p, i) {
-    var div = document.createElement('div');
-    div.className = 'protocol-card';
-    div.dataset.index = i;
-    div.draggable = true;
-    div.innerHTML =
-      '<div class="drag-handle"><span></span><span></span><span></span></div>' +
-      '<div class="p-icon">' + esc(p.icon) + '</div>' +
-      '<div class="p-info">' +
-        '<div class="p-name">' + esc(p.name) + '</div>' +
-        '<div class="p-meta">' + p.steps.length + ' STEPS</div>' +
-      '</div>' +
+/* ── RENDER HOME LIST ── */
+function renderHomeList(){
+  var el=document.getElementById('homeProtoList');
+  el.innerHTML='';
+  protocols.forEach(function(p,i){
+    var div=document.createElement('div');
+    div.className='protocol-card';
+    div.dataset.index=i;
+    div.innerHTML=
+      '<div class="drag-handle"><span></span><span></span><span></span></div>'+
+      '<div class="p-icon">'+esc(p.icon)+'</div>'+
+      '<div class="p-info">'+
+        '<div class="p-name">'+esc(p.name)+'</div>'+
+        '<div class="p-meta">'+p.steps.length+' STEPS</div>'+
+      '</div>'+
       '<div class="p-arrow">›</div>';
-
-    div.querySelector('.drag-handle').addEventListener('mousedown', function(e) { e.stopPropagation(); });
-    div.querySelector('.drag-handle').addEventListener('touchstart', function(e) { e.stopPropagation(); }, {passive:true});
-
-    div.addEventListener('click', function(e) {
-      if (e.target.closest('.drag-handle')) return;
+    div.addEventListener('click',function(e){
+      if(e.target.closest('.drag-handle'))return;
       startPlayer(p.id);
     });
-
-    setupDragHome(div, i);
     el.appendChild(div);
   });
-  setupTouchDragHome();
+  setupDrag();
 }
 
-/* ── DRAG & DROP HOME ── */
-var homeDragSrc = -1;
-function setupDragHome(el, idx) {
-  el.addEventListener('dragstart', function(e) {
-    homeDragSrc = idx;
-    e.dataTransfer.effectAllowed = 'move';
-    setTimeout(function() { el.classList.add('dragging'); }, 0);
-  });
-  el.addEventListener('dragend', function() {
-    el.classList.remove('dragging');
-    document.querySelectorAll('#homeProtoList .protocol-card').forEach(function(c) { c.classList.remove('drag-over'); });
-  });
-  el.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    document.querySelectorAll('#homeProtoList .protocol-card').forEach(function(c) { c.classList.remove('drag-over'); });
-    el.classList.add('drag-over');
-  });
-  el.addEventListener('drop', function(e) {
-    e.preventDefault();
-    var tgt = parseInt(el.dataset.index);
-    if (homeDragSrc === tgt) return;
-    var moved = protocols.splice(homeDragSrc, 1)[0];
-    protocols.splice(tgt, 0, moved);
-    saveProtocols();
-    renderHomeList();
-  });
-}
+/* ── DRAG TO REORDER ── */
+var dragSrcIdx=-1;
+var touchDragIdx=-1,touchDragEl=null,touchClone=null,touchOffsetY=0;
 
-/* Touch drag for home */
-var touchDragHomeIdx = -1;
-var touchDragHomeEl = null;
-var touchDragClone = null;
-var touchDragOffsetY = 0;
+function setupDrag(){
+  var list=document.getElementById('homeProtoList');
+  var cards=list.querySelectorAll('.protocol-card');
 
-function setupTouchDragHome() {
-  var list = document.getElementById('homeProtoList');
-  var cards = list.querySelectorAll('.protocol-card');
-  cards.forEach(function(card) {
-    var handle = card.querySelector('.drag-handle');
-    handle.addEventListener('touchstart', function(e) {
-      touchDragHomeIdx = parseInt(card.dataset.index);
-      touchDragHomeEl = card;
-      var touch = e.touches[0];
-      var rect = card.getBoundingClientRect();
-      touchDragOffsetY = touch.clientY - rect.top;
-      touchDragClone = card.cloneNode(true);
-      touchDragClone.style.cssText = 'position:fixed;left:' + rect.left + 'px;top:' + rect.top + 'px;width:' + rect.width + 'px;opacity:0.85;z-index:999;pointer-events:none;background:var(--panel2);border:0.5px solid var(--border-bright);border-radius:10px;';
-      document.body.appendChild(touchDragClone);
-      card.style.opacity = '0.3';
+  cards.forEach(function(card){
+    card.addEventListener('dragstart',function(e){
+      dragSrcIdx=parseInt(card.dataset.index);
+      e.dataTransfer.effectAllowed='move';
+      setTimeout(function(){card.classList.add('dragging');},0);
+    });
+    card.addEventListener('dragend',function(){
+      card.classList.remove('dragging');
+      list.querySelectorAll('.protocol-card').forEach(function(c){c.classList.remove('drag-over');});
+    });
+    card.addEventListener('dragover',function(e){
       e.preventDefault();
-    }, {passive:false});
+      list.querySelectorAll('.protocol-card').forEach(function(c){c.classList.remove('drag-over');});
+      card.classList.add('drag-over');
+    });
+    card.addEventListener('drop',function(e){
+      e.preventDefault();
+      var tgt=parseInt(card.dataset.index);
+      if(dragSrcIdx===tgt)return;
+      var moved=protocols.splice(dragSrcIdx,1)[0];
+      protocols.splice(tgt,0,moved);
+      renderHomeList();
+    });
+
+    var handle=card.querySelector('.drag-handle');
+    handle.addEventListener('touchstart',function(e){
+      touchDragIdx=parseInt(card.dataset.index);
+      touchDragEl=card;
+      var touch=e.touches[0];
+      var rect=card.getBoundingClientRect();
+      touchOffsetY=touch.clientY-rect.top;
+      touchClone=card.cloneNode(true);
+      touchClone.style.cssText='position:fixed;left:'+rect.left+'px;top:'+rect.top+'px;width:'+rect.width+'px;opacity:0.85;z-index:999;pointer-events:none;background:var(--panel2);border:0.5px solid var(--border-bright);border-radius:10px;';
+      document.body.appendChild(touchClone);
+      card.style.opacity='0.3';
+      e.preventDefault();
+    },{passive:false});
   });
 
-  document.addEventListener('touchmove', function(e) {
-    if (!touchDragClone) return;
-    var touch = e.touches[0];
-    touchDragClone.style.top = (touch.clientY - touchDragOffsetY) + 'px';
-    var cards2 = list.querySelectorAll('.protocol-card');
-    cards2.forEach(function(c) { c.classList.remove('drag-over'); });
-    var overEl = document.elementFromPoint(touch.clientX, touch.clientY);
-    var overCard = overEl ? overEl.closest('.protocol-card') : null;
-    if (overCard && overCard !== touchDragHomeEl) overCard.classList.add('drag-over');
+  document.addEventListener('touchmove',function(e){
+    if(!touchClone)return;
+    var touch=e.touches[0];
+    touchClone.style.top=(touch.clientY-touchOffsetY)+'px';
+    list.querySelectorAll('.protocol-card').forEach(function(c){c.classList.remove('drag-over');});
+    var over=document.elementFromPoint(touch.clientX,touch.clientY);
+    var overCard=over?over.closest('.protocol-card'):null;
+    if(overCard&&overCard!==touchDragEl)overCard.classList.add('drag-over');
     e.preventDefault();
-  }, {passive:false});
+  },{passive:false});
 
-  document.addEventListener('touchend', function(e) {
-    if (!touchDragClone) return;
-    var touch = e.changedTouches[0];
-    var overEl = document.elementFromPoint(touch.clientX, touch.clientY);
-    var overCard = overEl ? overEl.closest('#homeProtoList .protocol-card') : null;
-    if (overCard) {
-      var tgt = parseInt(overCard.dataset.index);
-      if (tgt !== touchDragHomeIdx) {
-        var moved = protocols.splice(touchDragHomeIdx, 1)[0];
-        protocols.splice(tgt, 0, moved);
-        saveProtocols();
+  document.addEventListener('touchend',function(e){
+    if(!touchClone)return;
+    var touch=e.changedTouches[0];
+    var over=document.elementFromPoint(touch.clientX,touch.clientY);
+    var overCard=over?over.closest('#homeProtoList .protocol-card'):null;
+    if(overCard){
+      var tgt=parseInt(overCard.dataset.index);
+      if(tgt!==touchDragIdx){
+        var moved=protocols.splice(touchDragIdx,1)[0];
+        protocols.splice(tgt,0,moved);
       }
     }
-    touchDragClone.remove();
-    touchDragClone = null;
-    touchDragHomeEl = null;
-    touchDragHomeIdx = -1;
+    touchClone.remove();touchClone=null;touchDragEl=null;touchDragIdx=-1;
     renderHomeList();
   });
-}
-
-/* ── EDITOR ── */
-function renderEditor() {
-  var el = document.getElementById('editorBody');
-  el.innerHTML = '';
-  protocols.forEach(function(p, pi) {
-    var card = document.createElement('div');
-    card.className = 'p-editor-card';
-    card.dataset.index = pi;
-    card.draggable = true;
-
-    var header = document.createElement('div');
-    header.className = 'p-editor-header';
-    header.innerHTML =
-      '<div class="editor-drag-handle"><span></span><span></span><span></span></div>' +
-      '<div class="p-editor-icon">' + esc(p.icon) + '</div>' +
-      '<input class="p-name-input" value="' + esc(p.name) + '" placeholder="Protocol name" />' +
-      '<div class="p-editor-count" id="ec' + pi + '">' + p.steps.length + ' STEPS</div>' +
-      '<div class="p-editor-toggle" id="et' + pi + '">›</div>';
-
-    var nameInput = header.querySelector('.p-name-input');
-    (function(idx) {
-      nameInput.addEventListener('change', function() {
-        protocols[idx].name = this.value;
-        saveProtocols();
-        renderHomeList();
-      });
-      nameInput.addEventListener('click', function(e) { e.stopPropagation(); });
-      header.querySelector('.editor-drag-handle').addEventListener('click', function(e) { e.stopPropagation(); });
-      header.addEventListener('click', function(e) {
-        if (e.target.closest('.editor-drag-handle') || e.target.closest('.p-name-input')) return;
-        toggleEditorCard(idx);
-      });
-    })(pi);
-
-    var stepsArea = document.createElement('div');
-    stepsArea.className = 'p-steps-area';
-    stepsArea.id = 'ep' + pi;
-
-    var stepsList = document.createElement('div');
-    stepsList.id = 'stepsList' + pi;
-    stepsArea.appendChild(stepsList);
-
-    var addStepBtn = document.createElement('button');
-    addStepBtn.className = 'add-step-btn';
-    addStepBtn.textContent = '+ ADD STEP';
-    (function(idx) { addStepBtn.addEventListener('click', function() { addStep(idx); }); })(pi);
-    stepsArea.appendChild(addStepBtn);
-
-    var delBtn = document.createElement('button');
-    delBtn.className = 'del-protocol-btn';
-    delBtn.textContent = 'DELETE PROTOCOL';
-    (function(idx) { delBtn.addEventListener('click', function() { deleteProtocol(idx); }); })(pi);
-    stepsArea.appendChild(delBtn);
-
-    card.appendChild(header);
-    card.appendChild(stepsArea);
-    el.appendChild(card);
-    renderStepsList(pi);
-
-    setupDragEditor(card, pi);
-  });
-
-  var addBtn = document.createElement('button');
-  addBtn.className = 'add-protocol-btn';
-  addBtn.textContent = '+ ADD NEW PROTOCOL';
-  addBtn.addEventListener('click', addProtocol);
-  el.appendChild(addBtn);
-
-  setupTouchDragEditor();
-}
-
-/* ── DRAG EDITOR ── */
-var editorDragSrc = -1;
-function setupDragEditor(el, idx) {
-  el.addEventListener('dragstart', function(e) {
-    editorDragSrc = idx;
-    e.dataTransfer.effectAllowed = 'move';
-    setTimeout(function() { el.classList.add('dragging'); }, 0);
-  });
-  el.addEventListener('dragend', function() {
-    el.classList.remove('dragging');
-    document.querySelectorAll('#editorBody .p-editor-card').forEach(function(c) { c.classList.remove('drag-over'); });
-  });
-  el.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    document.querySelectorAll('#editorBody .p-editor-card').forEach(function(c) { c.classList.remove('drag-over'); });
-    el.classList.add('drag-over');
-  });
-  el.addEventListener('drop', function(e) {
-    e.preventDefault();
-    var tgt = parseInt(el.dataset.index);
-    if (editorDragSrc === tgt) return;
-    var moved = protocols.splice(editorDragSrc, 1)[0];
-    protocols.splice(tgt, 0, moved);
-    saveProtocols();
-    renderEditor();
-    renderHomeList();
-  });
-}
-
-var editorTouchDragIdx = -1;
-var editorTouchDragEl = null;
-var editorTouchClone = null;
-var editorTouchOffsetY = 0;
-
-function setupTouchDragEditor() {
-  var body = document.getElementById('editorBody');
-  var cards = body.querySelectorAll('.p-editor-card');
-  cards.forEach(function(card) {
-    var handle = card.querySelector('.editor-drag-handle');
-    handle.addEventListener('touchstart', function(e) {
-      editorTouchDragIdx = parseInt(card.dataset.index);
-      editorTouchDragEl = card;
-      var touch = e.touches[0];
-      var rect = card.getBoundingClientRect();
-      editorTouchOffsetY = touch.clientY - rect.top;
-      editorTouchClone = card.cloneNode(true);
-      editorTouchClone.style.cssText = 'position:fixed;left:' + rect.left + 'px;top:' + rect.top + 'px;width:' + rect.width + 'px;opacity:0.85;z-index:999;pointer-events:none;background:var(--panel2);border:0.5px solid var(--border-bright);border-radius:10px;';
-      document.body.appendChild(editorTouchClone);
-      card.style.opacity = '0.3';
-      e.preventDefault();
-    }, {passive:false});
-  });
-
-  document.addEventListener('touchmove', function(e) {
-    if (!editorTouchClone) return;
-    var touch = e.touches[0];
-    editorTouchClone.style.top = (touch.clientY - editorTouchOffsetY) + 'px';
-    var allCards = body.querySelectorAll('.p-editor-card');
-    allCards.forEach(function(c) { c.classList.remove('drag-over'); });
-    var overEl = document.elementFromPoint(touch.clientX, touch.clientY);
-    var overCard = overEl ? overEl.closest('.p-editor-card') : null;
-    if (overCard && overCard !== editorTouchDragEl) overCard.classList.add('drag-over');
-    e.preventDefault();
-  }, {passive:false});
-
-  document.addEventListener('touchend', function(e) {
-    if (!editorTouchClone) return;
-    var touch = e.changedTouches[0];
-    var overEl = document.elementFromPoint(touch.clientX, touch.clientY);
-    var overCard = overEl ? overEl.closest('#editorBody .p-editor-card') : null;
-    if (overCard) {
-      var tgt = parseInt(overCard.dataset.index);
-      if (tgt !== editorTouchDragIdx) {
-        var moved = protocols.splice(editorTouchDragIdx, 1)[0];
-        protocols.splice(tgt, 0, moved);
-        saveProtocols();
-      }
-    }
-    editorTouchClone.remove();
-    editorTouchClone = null;
-    editorTouchDragEl = null;
-    editorTouchDragIdx = -1;
-    renderEditor();
-    renderHomeList();
-  });
-}
-
-function renderStepsList(pi) {
-  var el = document.getElementById('stepsList' + pi);
-  if (!el) return;
-  el.innerHTML = '';
-  protocols[pi].steps.forEach(function(s, si) {
-    var row = document.createElement('div');
-    row.className = 'step-row';
-    var num = document.createElement('div');
-    num.className = 'step-num-lbl';
-    num.textContent = String(si + 1).padStart(2, '0');
-    var ta = document.createElement('textarea');
-    ta.className = 'step-input';
-    ta.rows = 2;
-    ta.value = s;
-    (function(pIdx, sIdx) {
-      ta.addEventListener('change', function() { protocols[pIdx].steps[sIdx] = this.value; saveProtocols(); });
-      ta.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = this.scrollHeight + 'px'; });
-    })(pi, si);
-    var del = document.createElement('button');
-    del.className = 'step-del';
-    del.textContent = '✕';
-    (function(pIdx, sIdx) { del.addEventListener('click', function() { deleteStep(pIdx, sIdx); }); })(pi, si);
-    row.appendChild(num); row.appendChild(ta); row.appendChild(del);
-    el.appendChild(row);
-  });
-}
-
-function updateEditorCount(pi) {
-  var el = document.getElementById('ec' + pi);
-  if (el) el.textContent = protocols[pi].steps.length + ' STEPS';
-  renderHomeList();
-}
-
-function toggleEditorCard(pi) {
-  var area = document.getElementById('ep' + pi);
-  var tog = document.getElementById('et' + pi);
-  var isOpen = area.classList.contains('open');
-  document.querySelectorAll('.p-steps-area').forEach(function(a) { a.classList.remove('open'); });
-  document.querySelectorAll('.p-editor-toggle').forEach(function(t) { t.classList.remove('open'); });
-  if (!isOpen) { area.classList.add('open'); tog.classList.add('open'); }
-}
-
-function addStep(pi) {
-  protocols[pi].steps.push('New step — tap to edit.');
-  saveProtocols(); renderStepsList(pi); updateEditorCount(pi);
-}
-function deleteStep(pi, si) {
-  if (protocols[pi].steps.length <= 1) return;
-  protocols[pi].steps.splice(si, 1);
-  saveProtocols(); renderStepsList(pi); updateEditorCount(pi);
-}
-function addProtocol() {
-  var icons = ['NP','X1','ZZ','A0','B2','C3','D4','E5'];
-  protocols.push({ id: 'proto' + Date.now(), icon: icons[protocols.length % icons.length], name: 'New Protocol', steps: ['First step — tap to edit.'] });
-  saveProtocols(); renderEditor(); renderHomeList();
-}
-function deleteProtocol(pi) {
-  if (protocols.length <= 1) return;
-  if (!confirm('Delete "' + protocols[pi].name + '"?')) return;
-  protocols.splice(pi, 1);
-  saveProtocols(); renderEditor(); renderHomeList();
 }
 
 /* ── PLAYER ── */
-var playerProtocol = null;
-var playerStep = 0;
+var playerProtocol=null,playerStep=0;
 
-function startPlayer(id) {
-  var p = protocols.find(function(x) { return x.id === id; });
-  if (!p) return;
-  playerProtocol = p;
-  playerStep = 0;
-  document.getElementById('playerPTitle').textContent = p.name.toUpperCase();
+function startPlayer(id){
+  var p=protocols.find(function(x){return x.id===id;});
+  if(!p)return;
+  playerProtocol=p;playerStep=0;
+  document.getElementById('playerPTitle').textContent=p.name.toUpperCase();
   document.getElementById('doneScreen').classList.remove('show');
-  document.getElementById('playerStepBody').style.display = 'flex';
+  document.getElementById('playerStepBody').style.display='flex';
   document.getElementById('playerWrap').classList.add('active');
   renderPlayerStep();
 }
 
-function fitStepText() {
-  var container = document.getElementById('playerStepBody');
-  var el = document.getElementById('stepTxt');
-  var maxH = container.clientHeight - 80;
-  var maxW = container.clientWidth - 40;
-  var size = 42;
-  el.style.fontSize = size + 'px';
-  while ((el.scrollHeight > maxH || el.scrollWidth > maxW) && size > 14) {
-    size -= 1;
-    el.style.fontSize = size + 'px';
+function fitStepText(){
+  var container=document.getElementById('playerStepBody');
+  var el=document.getElementById('stepTxt');
+  var maxH=container.clientHeight-80;
+  var maxW=container.clientWidth-40;
+  var size=40;
+  el.style.fontSize=size+'px';
+  while((el.scrollHeight>maxH||el.scrollWidth>maxW)&&size>13){
+    size-=1;
+    el.style.fontSize=size+'px';
   }
 }
 
-function renderPlayerStep() {
-  var p = playerProtocol;
-  var total = p.steps.length;
-  var pct = Math.round((playerStep / total) * 100);
-  document.getElementById('stepLbl').textContent = 'STEP ' + String(playerStep + 1).padStart(2, '0');
-  document.getElementById('stepTxt').textContent = p.steps[playerStep];
-  document.getElementById('progCounter').textContent = 'STEP ' + (playerStep + 1) + ' OF ' + total;
-  document.getElementById('progPct').textContent = pct + '%';
-  document.getElementById('progFill').style.width = pct + '%';
-  var isLast = playerStep === total - 1;
-  document.getElementById('nextBtn').style.display = isLast ? 'none' : 'block';
-  document.getElementById('doneBtn').style.display = isLast ? 'block' : 'none';
-  setTimeout(fitStepText, 10);
+function renderPlayerStep(){
+  var p=playerProtocol;
+  var total=p.steps.length;
+  var pct=Math.round((playerStep/total)*100);
+  document.getElementById('stepLbl').textContent='STEP '+String(playerStep+1).padStart(2,'0');
+  document.getElementById('stepTxt').textContent=p.steps[playerStep];
+  document.getElementById('progCounter').textContent='STEP '+(playerStep+1)+' OF '+total;
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progFill').style.width=pct+'%';
+  var isLast=playerStep===total-1;
+  document.getElementById('nextBtn').style.display=isLast?'none':'block';
+  document.getElementById('doneBtn').style.display=isLast?'block':'none';
+  setTimeout(fitStepText,10);
 }
 
-function playerNext() {
-  if (playerStep < playerProtocol.steps.length - 1) { playerStep++; renderPlayerStep(); }
-}
-function playerPrev() {
-  if (playerStep > 0) {
+function playerNext(){if(playerStep<playerProtocol.steps.length-1){playerStep++;renderPlayerStep();}}
+function playerPrev(){
+  if(playerStep>0){
     playerStep--;
-    document.getElementById('nextBtn').style.display = 'block';
-    document.getElementById('doneBtn').style.display = 'none';
+    document.getElementById('nextBtn').style.display='block';
+    document.getElementById('doneBtn').style.display='none';
     renderPlayerStep();
   }
 }
-function closePlayer() {
-  document.getElementById('playerWrap').classList.remove('active');
-}
-
-/* ── SWIPE ── */
-var touchStartX = 0, touchStartY = 0, mouseStartX = 0, mouseIsDown = false;
-document.addEventListener('touchstart', function(e) {
-  touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
-}, { passive: true });
-document.addEventListener('touchend', function(e) {
-  if (touchDragClone || editorTouchClone) return;
-  var dx = e.changedTouches[0].clientX - touchStartX;
-  var dy = e.changedTouches[0].clientY - touchStartY;
-  if (Math.abs(dx) > Math.abs(dy) * 1.4 && Math.abs(dx) > 50) {
-    if (dx < 0 && currentScreen === 0) goToScreen(1);
-    else if (dx > 0 && currentScreen === 1) goToScreen(0);
-  }
-}, { passive: true });
-document.addEventListener('mousedown', function(e) { mouseStartX = e.clientX; mouseIsDown = true; });
-document.addEventListener('mouseup', function(e) {
-  if (!mouseIsDown) return;
-  mouseIsDown = false;
-  var dx = e.clientX - mouseStartX;
-  if (Math.abs(dx) > 60) {
-    if (dx < 0 && currentScreen === 0) goToScreen(1);
-    else if (dx > 0 && currentScreen === 1) goToScreen(0);
-  }
-});
+function closePlayer(){document.getElementById('playerWrap').classList.remove('active');}
 
 /* ── WEATHER ── */
-var weatherChart = null;
+var weatherChart=null;
+var currentTemp=31;
 
-function fetchWeather() {
-  var now = new Date();
-  var url = 'https://api.open-meteo.com/v1/forecast?latitude=23.8103&longitude=90.4125' +
-    '&hourly=temperature_2m,precipitation_probability' +
+function fetchWeather(){
+  var url='https://api.open-meteo.com/v1/forecast?latitude=23.8103&longitude=90.4125'+
+    '&hourly=temperature_2m,precipitation_probability'+
     '&current_weather=true&timezone=Asia%2FDhaka&forecast_days=2';
   fetch(url)
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var cw = data.current_weather;
-      document.getElementById('tempDisplay').textContent = Math.round(cw.temperature);
-      document.getElementById('condDisplay').textContent = getCondition(cw.weathercode);
-
-      var hours = data.hourly.time;
-      var nowH = now.getHours();
-      var temps = [], rains = [], labels = [];
-
-      for (var i = 0; i < hours.length && labels.length < 8; i++) {
-        var t = new Date(hours[i]);
-        if (t >= now && t.getMinutes() === 0) {
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var cw=data.current_weather;
+      currentTemp=Math.round(cw.temperature);
+      document.getElementById('tempDisplay').textContent=currentTemp;
+      document.getElementById('condDisplay').textContent=getCondition(cw.weathercode);
+      var hours=data.hourly.time;
+      var now=new Date();
+      var temps=[],rains=[],labels=[];
+      for(var i=0;i<hours.length&&labels.length<24;i++){
+        var t=new Date(hours[i]);
+        if(t>=now&&t.getMinutes()===0){
           temps.push(Math.round(data.hourly.temperature_2m[i]));
           rains.push(Math.round(data.hourly.precipitation_probability[i]));
-          var h = t.getHours();
-          labels.push(h === 0 ? '12AM' : h < 12 ? h + 'AM' : h === 12 ? '12PM' : (h-12) + 'PM');
+          var h=t.getHours();
+          labels.push(h===0?'12AM':h<12?h+'AM':h===12?'12PM':(h-12)+'PM');
         }
       }
-
-      var labelsEl = document.getElementById('chartLabels');
-      labelsEl.innerHTML = '';
-      labels.forEach(function(l) { var s = document.createElement('span'); s.textContent = l; labelsEl.appendChild(s); });
-
-      buildChart(temps, rains, labels);
+      buildChart(temps,rains,labels,currentTemp);
     })
-    .catch(function() {
-      var fallbackLabels = ['NOW','3PM','6PM','9PM','12AM','3AM','6AM','9AM'];
-      document.getElementById('tempDisplay').textContent = '31';
-      document.getElementById('condDisplay').textContent = 'PARTLY CLOUDY';
-      var labelsEl = document.getElementById('chartLabels');
-      labelsEl.innerHTML = '';
-      fallbackLabels.forEach(function(l) { var s = document.createElement('span'); s.textContent = l; labelsEl.appendChild(s); });
-      buildChart([31,33,34,32,29,28,27,29],[20,35,40,25,15,10,10,20], fallbackLabels);
+    .catch(function(){
+      currentTemp=31;
+      document.getElementById('tempDisplay').textContent='31';
+      document.getElementById('condDisplay').textContent='PARTLY CLOUDY';
+      var fallbackT=[31,32,34,35,35,34,32,30,29,28,27,27,28,29,30,31,32,33,33,32,31,30,29,28];
+      var fallbackR=[10,15,20,35,40,35,25,15,10,5,5,5,10,20,30,35,30,25,20,15,10,10,5,5];
+      var fallbackL=[];
+      var now=new Date();
+      for(var i=0;i<24;i++){
+        var h=(now.getHours()+i)%24;
+        fallbackL.push(h===0?'12AM':h<12?h+'AM':h===12?'12PM':(h-12)+'PM');
+      }
+      buildChart(fallbackT,fallbackR,fallbackL,currentTemp);
     });
 }
 
-function getCondition(code) {
-  if (code === 0) return 'CLEAR SKY';
-  if (code <= 3) return 'PARTLY CLOUDY';
-  if (code <= 49) return 'FOGGY';
-  if (code <= 69) return 'DRIZZLE / RAIN';
-  if (code <= 79) return 'SNOW';
-  if (code <= 99) return 'THUNDERSTORM';
-  return 'CLOUDY';
+function getCondition(code){
+  if(code===0)return'CLEAR SKY';
+  if(code<=3)return'PARTLY CLOUDY';
+  if(code<=49)return'FOGGY';
+  if(code<=69)return'DRIZZLE / RAIN';
+  if(code<=79)return'SNOW';
+  if(code<=99)return'THUNDERSTORM';
+  return'CLOUDY';
 }
 
-function buildChart(temps, rains, labels) {
-  if (weatherChart) { weatherChart.destroy(); }
-  weatherChart = new Chart(document.getElementById('wChart'), {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [
+function buildChart(temps,rains,labels,baseTemp){
+  if(weatherChart){weatherChart.destroy();}
+
+  var BAR_W=38;
+  var totalW=Math.max(labels.length*BAR_W, document.getElementById('chartScroll').clientWidth);
+  var visibleBars=Math.floor(document.getElementById('chartScroll').clientWidth/BAR_W);
+  var chartW=labels.length*BAR_W;
+
+  document.getElementById('chartInner').style.width=chartW+'px';
+  document.getElementById('chartInner').style.height='110px';
+
+  var canvas=document.getElementById('wChart');
+  canvas.style.width=chartW+'px';
+  canvas.style.height='110px';
+
+  /* sync label scroll with chart scroll */
+  var labelRow=document.getElementById('chartLabelRow');
+  labelRow.innerHTML='';
+  labels.forEach(function(l){
+    var s=document.createElement('span');
+    s.textContent=l;
+    s.style.width=BAR_W+'px';
+    s.style.display='inline-block';
+    s.style.textAlign='center';
+    s.style.fontSize='8px';
+    s.style.color='var(--text-dim)';
+    s.style.fontFamily="'Share Tech Mono',monospace";
+    labelRow.appendChild(s);
+  });
+  document.getElementById('labelsScroll').style.width='100%';
+  labelRow.style.width=chartW+'px';
+
+  /* sync scroll positions */
+  var chartScroll=document.getElementById('chartScroll');
+  var labelsScroll=document.getElementById('labelsScroll');
+  chartScroll.addEventListener('scroll',function(){
+    labelsScroll.scrollLeft=chartScroll.scrollLeft;
+  },{passive:true});
+
+  var tMin=baseTemp-10;
+  var tMax=baseTemp+10;
+
+  weatherChart=new Chart(canvas,{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[
         {
-          type: 'line',
-          label: 'Temp °C',
-          data: temps,
-          borderColor: '#00d4ff',
-          backgroundColor: 'rgba(0,212,255,0.06)',
-          borderWidth: 2,
-          pointRadius: 3,
-          pointBackgroundColor: '#00d4ff',
-          tension: 0.4,
-          yAxisID: 'yTemp',
-          order: 1
+          type:'line',
+          label:'Temp °C',
+          data:temps,
+          borderColor:'#00d4ff',
+          backgroundColor:'rgba(0,212,255,0.06)',
+          borderWidth:2,
+          pointRadius:3,
+          pointBackgroundColor:'#00d4ff',
+          tension:0.4,
+          yAxisID:'yTemp',
+          order:1
         },
         {
-          type: 'bar',
-          label: 'Rain %',
-          data: rains,
-          backgroundColor: 'rgba(0,130,255,0.25)',
-          borderColor: 'rgba(0,160,255,0.5)',
-          borderWidth: 1,
-          borderRadius: 2,
-          yAxisID: 'yRain',
-          order: 2
+          type:'bar',
+          label:'Rain %',
+          data:rains,
+          backgroundColor:'rgba(0,130,255,0.25)',
+          borderColor:'rgba(0,160,255,0.5)',
+          borderWidth:1,
+          borderRadius:2,
+          yAxisID:'yRain',
+          order:2
         }
       ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#0a1628',
-          borderColor: 'rgba(0,212,255,0.3)',
-          borderWidth: 1,
-          titleColor: '#00d4ff',
-          bodyColor: '#c8e8f5',
-          titleFont: { family: 'Share Tech Mono', size: 9 },
-          bodyFont: { family: 'Share Tech Mono', size: 9 }
+    options:{
+      responsive:false,
+      maintainAspectRatio:false,
+      animation:{duration:400},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#0a1628',
+          borderColor:'rgba(0,212,255,0.3)',
+          borderWidth:1,
+          titleColor:'#00d4ff',
+          bodyColor:'#c8e8f5',
+          titleFont:{family:'Share Tech Mono',size:9},
+          bodyFont:{family:'Share Tech Mono',size:9}
         }
       },
-      scales: {
-        x: {
-          ticks: { color: '#5a8aaa', font: { size: 8, family: 'Share Tech Mono' }, autoSkip: false, maxRotation: 0 },
-          grid: { color: 'rgba(0,212,255,0.04)' },
-          border: { color: 'rgba(0,212,255,0.08)' }
+      scales:{
+        x:{
+          ticks:{display:false},
+          grid:{color:'rgba(0,212,255,0.04)'},
+          border:{color:'rgba(0,212,255,0.08)'}
         },
-        yTemp: {
-          type: 'linear',
-          position: 'left',
-          ticks: { color: '#00d4ff', font: { size: 8, family: 'Share Tech Mono' }, maxTicksLimit: 4 },
-          grid: { color: 'rgba(0,212,255,0.05)' },
-          border: { color: 'rgba(0,212,255,0.08)' }
+        yTemp:{
+          type:'linear',
+          position:'left',
+          min:tMin,
+          max:tMax,
+          ticks:{color:'#00d4ff',font:{size:8,family:'Share Tech Mono'},maxTicksLimit:4},
+          grid:{color:'rgba(0,212,255,0.05)'},
+          border:{color:'rgba(0,212,255,0.08)'}
         },
-        yRain: {
-          type: 'linear',
-          position: 'right',
-          min: 0,
-          max: 100,
-          ticks: { color: 'rgba(0,140,255,0.7)', font: { size: 8, family: 'Share Tech Mono' }, maxTicksLimit: 4 },
-          grid: { drawOnChartArea: false },
-          border: { color: 'rgba(0,212,255,0.08)' }
+        yRain:{
+          type:'linear',
+          position:'right',
+          min:0,max:100,
+          ticks:{color:'rgba(0,140,255,0.7)',font:{size:8,family:'Share Tech Mono'},maxTicksLimit:4},
+          grid:{drawOnChartArea:false},
+          border:{color:'rgba(0,212,255,0.08)'}
         }
       }
     }
   });
 }
 
-function esc(str) {
+function esc(str){
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 /* ── INIT ── */
-loadProtocols();
 renderHomeList();
 fetchWeather();
-window.addEventListener('resize', function() { if (playerProtocol) fitStepText(); });
+window.addEventListener('resize',function(){if(playerProtocol)fitStepText();});
 </script>
 </body>
 </html>
